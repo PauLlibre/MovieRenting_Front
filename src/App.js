@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import MoviesList from "./Components/MoviesList";
+import { MovieDbService } from "./services/MovieDbService";
+import NavBar from "./Components/NavBar";
+import { useState } from "react";
+import "./App.scss";
 
-function App() {
+export default function App() {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    getAllMovies();
+  }, []);
+
+  const getAllMovies = async () => {
+    try {
+      const result = await MovieDbService.getAllMovies();
+      setMovies(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="root">
+      <NavBar />
+      <MoviesList movies={movies} />
     </div>
   );
 }
-
-export default App;

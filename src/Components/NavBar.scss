@@ -1,0 +1,30 @@
+div {
+  color: black;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.nav-bar-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 50px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-bar-right {
+  padding-right: 50px;
+}
