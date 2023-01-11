@@ -1,5 +1,5 @@
 import axios from "axios";
-import MoviesList from "../Components/MoviesList";
+import MoviesList from "../Containers/MoviesList/MoviesList";
 
 export const MovieDbService = {};
 
