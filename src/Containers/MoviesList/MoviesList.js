@@ -22,10 +22,12 @@ export default function MoviesList() {
 
   const movieList = movies.map((movie) => {
     console.log(movie.poster_path);
+
     return (
       <MovieCard
         title={movie.title}
         key={movie.id}
+        id={movie.id}
         image={movie.poster_path}
         price={Math.floor(Math.random() * 10).toFixed(2)}
       />

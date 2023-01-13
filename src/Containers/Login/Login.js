@@ -1,38 +1,68 @@
 import React from "react";
 import "./Login.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AuthService from "../../services/AuthService";
 import { useNavigate } from "react-router";
+import { validateLoginFormValues } from "../../helpers/form-utilities";
+import TokenStorageService from "../../services/TokenStorageService";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/login/loginSlice";
+import { logUser } from "../../features/userData/userDataSlice";
 
 export default function Login() {
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const userName = "";
+
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  useEffect(() => {
+    const credentials = {
+      email: formValues.email,
+      password: formValues.password,
+    };
+
+    if (Object.keys(formErrors).length == 0 && isSubmit) {
+      loginNow(credentials);
+    }
+  }, [formErrors]);
 
   const navigate = useNavigate();
 
-  const handleMail = (ev) => {
-    setMail(ev.target.value);
+  const handleChange = (ev) => {
+    const { name, value } = ev.target;
+    setFormValues({
+      ...formValues,
+
+      [name]: value,
+    });
   };
 
-  const handlePassword = (ev) => {
-    setPassword(ev.target.value);
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    setFormErrors(validateLoginFormValues(formValues));
+    setIsSubmit(true);
   };
 
-  const credentials = {
-    email: mail,
-    password,
-  };
-
-  const login = async (credentials) => {
+  const loginNow = async (credentials) => {
     try {
       const res = await AuthService.login(credentials);
-      console.log(res.data);
+      TokenStorageService.saveToken(res.data.token);
+      console.log(res.data.role);
+      dispatch(login());
 
       switch (res.data.role) {
         case "user":
-          navigate("/movies");
+          return navigate("/movies");
         case "admin":
-          navigate("/admin");
+          return navigate("/admin");
       }
     } catch (error) {
       console.log(error);
@@ -41,15 +71,29 @@ export default function Login() {
 
   return (
     <div className="login-root">
-      <div className="name">
-        <label>EMAIL</label>
-        <input type="mail" value={mail} onChange={handleMail} />
-      </div>
-      <div>
-        <label>PASSWORD</label>
-        <input type="password" value={password} onChange={handlePassword} />
-      </div>
-      <button onClick={() => login(credentials)}>LOGIN</button>
+      <form onSubmit={handleSubmit} noValidate>
+        <div className="name">
+          <label>EMAIL</label>
+          <input
+            name="email"
+            type="email"
+            value={formValues.email}
+            onChange={handleChange}
+          />
+          <div className="mail-error">{formErrors.email}</div>
+        </div>
+        <div>
+          <label>PASSWORD</label>
+          <input
+            name="password"
+            type="password"
+            value={formValues.password}
+            onChange={handleChange}
+          />
+          <div className="mail-error">{formErrors.password}</div>
+        </div>
+        <button>LOGIN</button>
+      </form>
     </div>
   );
 }

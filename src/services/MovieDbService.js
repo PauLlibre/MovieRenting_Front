@@ -16,3 +16,9 @@ MovieDbService.getImages = async (url) => {
 
   return response;
 };
+
+MovieDbService.getById = async (id) => {
+  let response = await axios.get(`http://localhost:3000/movies/${id}`);
+
+  return response.data.results;
+};

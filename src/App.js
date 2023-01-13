@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import MoviesList from "./Containers/MoviesList/MoviesList";
 import { MovieDbService } from "./services/MovieDbService";
-import NavBar from "./Components/NavBar";
+import NavBar from "./Components/NavBar/NavBar";
 import { useState } from "react";
 import Home from "./Containers/Home/Home";
 import Login from "./Containers/Login/Login";
 import Register from "./Containers/Register/Register";
-import Admin from "./Containers/Admin";
+import Admin from "./Containers/Admin/Admin";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,6 +20,7 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import { dblClick } from "@testing-library/user-event/dist/click";
+import MovieDetails from "./Containers/MovieDetails/MovieDetails";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/movies/:id" element={<MovieDetails />} />
         </Routes>
       </BrowserRouter>
     </div>
