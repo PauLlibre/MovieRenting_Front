@@ -3,11 +3,21 @@ import UserService from "../../services/UserService";
 import TokenStorageService from "../../services/TokenStorageService";
 import UserCard from "../../Components/UserCard/UserCard";
 import "./Admin.scss";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 export default function Admin() {
   const [users, setUsers] = useState([]);
   const token = TokenStorageService.getToken();
-  console.log(token);
+  const navigate = useNavigate();
+
+  const loginState = useSelector((state) => state.isLoggedIn);
+
+  useEffect(() => {
+    if (!loginState) {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     getUsers(token);

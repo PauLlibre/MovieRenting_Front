@@ -1,9 +1,18 @@
 import React from "react";
 import "./Home.scss";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const navigate = useNavigate();
+  const loginState = useSelector((state) => state.isLoggedIn);
+
+  useEffect(() => {
+    if (!loginState) {
+      navigate("/");
+    }
+  }, []);
 
   const handleLogin = () => {
     navigate("/login");
