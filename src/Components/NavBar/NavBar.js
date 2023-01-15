@@ -3,10 +3,20 @@ import "./NavBar.scss";
 import { useNavigate } from "react-router";
 import TokenStorageService from "../../services/TokenStorageService";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../features/login/loginSlice";
+import { checkLogin, logout } from "../../features/login/loginSlice";
+import { logoutUser, checkUser } from "../../features/userData/userDataSlice";
+import { stringToAlpha } from "tsparticles-engine";
 
 export default function NavBar() {
-  const loginState = useSelector((state) => state.isLoggedIn);
+  const loginState = useSelector((state) => state.login.isLoggedIn);
+  const userData = useSelector((state) => state.userData);
+
+  const userName = JSON.parse(localStorage.getItem("user")) || {
+    user: "",
+    user_id: "",
+    user_role: "",
+  };
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -15,8 +25,9 @@ export default function NavBar() {
   };
 
   useEffect(() => {
-    isLoggedIn();
-  }, [loginState]);
+    dispatch(checkLogin());
+    dispatch(checkUser());
+  }, [userData]);
 
   const handleMovies = () => {
     navigate("/movies");
@@ -26,14 +37,14 @@ export default function NavBar() {
     console.log("Successfully logged out");
     TokenStorageService.logOut();
     dispatch(logout());
+    dispatch(logoutUser());
     navigate("/");
   };
 
   const isLoggedIn = () => {
-    if (loginState === true) {
+    if (loginState) {
       return "Logout";
     } else {
-      console.log(loginState);
       return "Login";
     }
   };
@@ -46,6 +57,7 @@ export default function NavBar() {
           <li>Categories</li>
           <li onClick={handleMovies}>Renting</li>
           <li onClick={handleLogout}>{isLoggedIn(loginState)}</li>
+          <li>{userName.name}</li>
         </ul>
       </div>
     </div>

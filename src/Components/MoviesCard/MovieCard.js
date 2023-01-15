@@ -4,14 +4,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import RentedMovieService from "../../services/RentedMovieService";
 
-export default function MovieCard({ title, image, price, id }) {
+export default function MovieCard({ title, image, price, id, update }) {
   let source = `https://image.tmdb.org/t/p/w185/${image}`;
 
   const navigate = useNavigate();
 
+  const { user_id } = JSON.parse(localStorage.getItem("user"));
+
   const details = {
     id,
     title,
+    image,
   };
 
   const [titulo, setTitulo] = useState("");
@@ -35,12 +38,33 @@ export default function MovieCard({ title, image, price, id }) {
     navigate(`/movies/${id}`);
   };
 
-  const handleRent = (details) => {
-    RentedMovieService.rentMovie(details);
+  const handleRent = async (details) => {
+    await RentedMovieService.rentMovie(details, user_id);
+    update();
   };
 
-  const handleDelete = (id) => {
-    RentedMovieService.deleteRentedMovie(id);
+  const handleDelete = async (id) => {
+    await RentedMovieService.deleteRentedMovie(id, user_id);
+    update();
+  };
+
+  const buttons = () => {
+    if (update) {
+      return (
+        <div>
+          <button
+            onClick={() => {
+              handleRent(details);
+            }}
+          >
+            +
+          </button>
+          <button onClick={() => handleDelete(id)}>-</button>
+        </div>
+      );
+    } else {
+      return null;
+    }
   };
 
   return (
@@ -51,14 +75,7 @@ export default function MovieCard({ title, image, price, id }) {
     >
       <div className="titulo">{titulo}</div>
       <div className="price">{precio}</div>
-      <button
-        onClick={() => {
-          handleRent(details);
-        }}
-      >
-        +
-      </button>
-      <button onClick={() => handleDelete(id)}>-</button>
+      {buttons()}
       <img src={source} alt="" onClick={() => handleDetails(id)} />
     </div>
   );

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { validateLoginFormValues } from "../../helpers/form-utilities";
 import TokenStorageService from "../../services/TokenStorageService";
 import { useDispatch } from "react-redux";
-import { login } from "../../features/login/loginSlice";
+import { checkLogin } from "../../features/login/loginSlice";
 import { logUser } from "../../features/userData/userDataSlice";
 
 export default function Login() {
@@ -56,7 +56,8 @@ export default function Login() {
       const res = await AuthService.login(credentials);
       TokenStorageService.saveToken(res.data.token);
       console.log(res.data.role);
-      dispatch(login());
+      dispatch(checkLogin());
+      dispatch(logUser(res.data));
 
       switch (res.data.role) {
         case "user":
