@@ -46,8 +46,8 @@ export default function UserDetails() {
     : null;
   return (
     <div className="user">
-      <div className="user-title">{userDetail.name}</div>
-      <div className="user-info">
+      <div className="user-title ">{userDetail.name}</div>
+      <div className="user-info ">
         <div>
           <span>ROLE: </span>
           {userDetail.role}
@@ -60,11 +60,11 @@ export default function UserDetails() {
           {userDetail.email}
         </div>
       </div>
-      <div className="rented-movies">
+      <div className="rented-movies movies-list-animation">
         <div className="rented-movies-title">
           <span>{userDetail.name}</span>'s rented movies
         </div>
-        <div className="movies-list">{rentedMovies}</div>
+        <div className="movies-list ">{rentedMovies}</div>
       </div>
     </div>
   );

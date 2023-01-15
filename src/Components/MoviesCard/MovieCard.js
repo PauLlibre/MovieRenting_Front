@@ -90,7 +90,7 @@ export default function MovieCard({
     <div
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
-      className="movie"
+      className="movie h3-animation"
     >
       <div className="titulo">{titulo}</div>
       <div className="price">{precio}</div>

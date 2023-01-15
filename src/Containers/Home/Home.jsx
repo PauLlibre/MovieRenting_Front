@@ -14,9 +14,9 @@ export default function Home() {
   };
 
   return (
-    <div className="home-root">
-      <div className="home-title">FILMO</div>
-      <div className="home-buttons">
+    <div className="home-root ">
+      <div className="home-title movies-list-animation">FILMO</div>
+      <div className="home-buttons movies-list-animation">
         <button className="home-button" onClick={handleLogin}>
           LOGIN
         </button>
