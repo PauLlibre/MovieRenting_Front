@@ -1,8 +1,62 @@
 .movie-details {
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.movie-details img {
+  max-width: 100%;
+  min-width: 500px;
+  margin-left: 50px;
+  border-radius: 20px;
+}
+
+.movie-title {
+  color: black;
+  font-size: 1rem;
+  border-radius: 20px;
+  letter-spacing: 0.2rem;
+}
+
+.details {
+  width: 400px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  align-items: flex-start;
+  padding-left: 100px;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.movie-details-root {
+  margin-top: 10%;
+}
+
+.movie-title-main {
+  padding-left: 10%;
+  color: #7671f1;
+  letter-spacing: 0.7rem;
+  font-size: 3rem;
+}
+
+.movie-details span {
+  color: #7671f1;
+}
+
+.details ul {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.movie-rent-button {
+  align-self: flex-end;
+}
+
+.movie-rent-button button {
+  background-color: #39e75f;
+  border-radius: 20px;
+  border: none;
+  width: 150px;
+  height: 30px;
 }

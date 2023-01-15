@@ -19,8 +19,10 @@ export default function UserCard({ user, user_id, update }) {
     console.log(user_id);
   };
   return (
-    <div className="user">
-      <button onClick={() => handleDelete(user_id)}>X</button>
+    <div className="user-card-medium">
+      <button onClick={() => handleDelete(user_id)} className="delete-button">
+        X
+      </button>
       <div onClick={handleUserDetails}>{user.name}</div>
     </div>
   );

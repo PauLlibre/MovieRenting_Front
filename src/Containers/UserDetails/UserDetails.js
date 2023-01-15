@@ -7,6 +7,7 @@ import MovieCard from "../../Components/MoviesCard/MovieCard";
 export default function UserDetails() {
   const [userDetail, setUserDetail] = useState({});
   const token = localStorage.getItem("auth-key");
+  const { role } = JSON.parse(localStorage.getItem("user"));
 
   const { id } = useParams();
 
@@ -24,7 +25,7 @@ export default function UserDetails() {
     userDetails();
   };
 
-  console.log(userDetail.id);
+  console.log(userDetail.role);
   const rents = userDetail.rented_movies;
   const rentedMovies = rents
     ? rents.map((rent) => {
@@ -37,18 +38,34 @@ export default function UserDetails() {
             price={Math.floor(Math.random() * 10).toFixed(2)}
             update={handleDelete}
             userId={userDetail._id}
+            backdropPath={rent.backdrop_path}
+            user_role={role}
           />
         );
       })
     : null;
   return (
     <div className="user">
-      <div>{userDetail.name}</div>
-      <div>{userDetail.role}</div>
-      <div>User From: {userDetail.createdAt}</div>
-      <div>{userDetail.email}</div>
-
-      <div className="movies-list">{rentedMovies}</div>
+      <div className="user-title">{userDetail.name}</div>
+      <div className="user-info">
+        <div>
+          <span>ROLE: </span>
+          {userDetail.role}
+        </div>
+        <div>
+          <span>User From: </span> {userDetail.createdAt}
+        </div>
+        <div>
+          <span>EMAIL: </span>
+          {userDetail.email}
+        </div>
+      </div>
+      <div className="rented-movies">
+        <div className="rented-movies-title">
+          <span>{userDetail.name}</span>'s rented movies
+        </div>
+        <div className="movies-list">{rentedMovies}</div>
+      </div>
     </div>
   );
 }

@@ -6,3 +6,39 @@
   align-items: center;
   width: 100%;
 }
+
+.user-card-medium {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 300px;
+  gap: 50px;
+  border: 4px #7671f1 solid;
+  height: 40px;
+  color: black;
+  padding-left: 20px;
+  border-radius: 20px;
+  transition: all 0.5s ease-in-out;
+}
+
+.user-card-medium:hover {
+  border: 4px black solid;
+  background-color: #7671f1;
+  color: white;
+}
+
+.user-card-medium .delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  box-shadow: 1px 1px 4px 1px black;
+}
+
+.delete-button:hover {
+  background-color: red;
+}

@@ -15,10 +15,14 @@ export default function Home() {
 
   return (
     <div className="home-root">
-      Home
-      <div>
-        <button onClick={handleLogin}>LOGIN</button>
-        <button onClick={handleRegister}>REGISTER</button>
+      <div className="home-title">FILMO</div>
+      <div className="home-buttons">
+        <button className="home-button" onClick={handleLogin}>
+          LOGIN
+        </button>
+        <button className="home-button" onClick={handleRegister}>
+          REGISTER
+        </button>
       </div>
     </div>
   );

@@ -60,17 +60,15 @@ export default function NavBar() {
   };
   return (
     <div className="nav-bar">
-      <div className="nav-bar-left">FILMO</div>
-      <div className="nav-bar-right">
-        <ul>
-          <li onClick={handleHome}>Home</li>
-          <li>Categories</li>
-          <li onClick={handleMovies}>Renting</li>
-          <li onClick={handleLogout}>{isLoggedIn(loginState)}</li>
-          <li onClick={handleAdmin}>{isAdmin()}</li>
-          <li>{userName.name}</li>
-        </ul>
-      </div>
+      <ul>
+        <div className="logo">FILMO</div>
+        <li onClick={handleHome}>Home</li>
+        <li>Categories</li>
+        <li onClick={handleMovies}>Renting</li>
+        <li onClick={handleLogout}>{isLoggedIn(loginState)}</li>
+        <li className="logo">{userName.name}</li>
+        <li onClick={handleAdmin}>{isAdmin()}</li>
+      </ul>
     </div>
   );
 }

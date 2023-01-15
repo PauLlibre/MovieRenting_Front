@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
 import MovieCard from "../../Components/MoviesCard/MovieCard";
 import "./MovieList.scss";
 import { MovieDbService } from "../../services/MovieDbService";
 import { useState, useEffect } from "react";
 import RentedMovieService from "../../services/RentedMovieService";
+import RecommendedMovie from "../../Components/RecommendedMovie/RecommendedMovie";
 
 export default function MoviesList() {
   const [movies, setMovies] = useState([]);
   const [rentedmovies, setRentedMovies] = useState([]);
 
-  const { user_id } = JSON.parse(localStorage.getItem("user"));
-
+  const { user_id, role } = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     getAllMovies();
     getAllRentedMovies();
@@ -28,12 +28,24 @@ export default function MoviesList() {
   const getAllRentedMovies = async () => {
     try {
       const result = await RentedMovieService.getAllMovies(user_id);
-      console.log(result);
       setRentedMovies(result.rented_movies);
     } catch (error) {
       console.log(error);
     }
   };
+  const movieListElement = document.querySelector(".movies-list-animation");
+  useEffect(() => {
+    setTimeout(() => {
+      if (movieListElement) {
+        movieListElement.classList.add("movies-list-animation");
+      }
+    }, 0);
+    return () => {
+      if (movieListElement) {
+        movieListElement.classList.remove("movies-list-animation");
+      }
+    };
+  }, []);
 
   const movieList = movies.map((movie) => {
     return (
@@ -44,11 +56,12 @@ export default function MoviesList() {
         image={movie.poster_path}
         price={Math.floor(Math.random() * 10).toFixed(2)}
         update={getAllRentedMovies}
+        backdropPath={movie.backdrop_path}
+        user_role={role}
       />
     );
   });
-  console.log(rentedmovies);
-  console.log(rentedmovies[0]);
+
   const RentedMovieList = rentedmovies.map((movie) => {
     return (
       <MovieCard
@@ -57,16 +70,25 @@ export default function MoviesList() {
         id={movie.id}
         image={movie.poster_path}
         price={Math.floor(Math.random() * 10).toFixed(2)}
+        backdropPath={movie.backdrop_path}
       />
     );
   });
 
   return (
     <div>
-      <h3>Rent</h3>
-      <div className="movies-list">{movieList}</div>
-      <h3>Available</h3>
-      <div className="movies-list">{RentedMovieList}</div>
+      <div className="h3-animation">
+        {movies.length ? (
+          <RecommendedMovie movie={movies} />
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
+
+      <h3 className="h3-animation">Rent</h3>
+      <div className="movies-list movies-list-animation">{movieList}</div>
+      <h3 className="h3-animation">Available</h3>
+      <div className="movies-list movies-list-animation">{RentedMovieList}</div>
     </div>
   );
 }

@@ -1,8 +1,9 @@
 .movie {
   position: relative;
+  z-index: 0;
 }
 
-img:hover {
+.movie img:hover {
   opacity: 0.2;
 }
 
@@ -11,7 +12,7 @@ img:hover {
   word-wrap: break-word;
   width: 185px;
   bottom: 50px;
-  color: white;
+  color: black;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: bold;
 }
@@ -21,7 +22,20 @@ img:hover {
   word-wrap: break-word;
   width: 185px;
   bottom: 20px;
-  color: white;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: black;
   font-weight: bold;
+}
+
+.poster {
+  border-radius: 20px;
+  z-index: -10000;
+}
+
+.buttons {
+  position: absolute;
+  word-wrap: break-word;
+  top: 20px;
+  color: black;
+  font-weight: bold;
+  z-index: 100;
 }

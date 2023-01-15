@@ -4,27 +4,38 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import RentedMovieService from "../../services/RentedMovieService";
 
-export default function MovieCard({ title, image, price, id, update, userId }) {
+export default function MovieCard({
+  title,
+  image,
+  price,
+  id,
+  update,
+  userId,
+  backdropPath,
+  user_role,
+}) {
   let source = `https://image.tmdb.org/t/p/w185/${image}`;
 
   const navigate = useNavigate();
 
   const { user_id } = JSON.parse(localStorage.getItem("user"));
 
-  console.log(userId);
   const user = userId || user_id;
-  console.log(user);
 
   const details = {
     id,
     title,
     image,
+    backdrop_path: backdropPath,
+    user_role,
   };
 
   const [titulo, setTitulo] = useState("");
   const [precio, setPrecio] = useState("");
+  const [hover, setHover] = useState(false);
 
   const handleMouseOver = () => {
+    setHover(true);
     setTitulo(title);
     if (price == 0) {
       setPrecio("Free");
@@ -34,6 +45,7 @@ export default function MovieCard({ title, image, price, id, update, userId }) {
   };
 
   const handleMouseOut = () => {
+    setHover(false);
     setTitulo("");
     setPrecio("");
   };
@@ -53,9 +65,10 @@ export default function MovieCard({ title, image, price, id, update, userId }) {
   };
 
   const buttons = () => {
-    if (update) {
+    console.log(user_role);
+    if (update && hover) {
       return (
-        <div>
+        <div className="buttons">
           <button
             onClick={() => {
               handleRent(details);
@@ -63,7 +76,9 @@ export default function MovieCard({ title, image, price, id, update, userId }) {
           >
             +
           </button>
-          <button onClick={() => handleDelete(id)}>-</button>
+          {user_role == "admin" ? (
+            <button onClick={() => handleDelete(id)}>-</button>
+          ) : null}
         </div>
       );
     } else {
@@ -80,7 +95,12 @@ export default function MovieCard({ title, image, price, id, update, userId }) {
       <div className="titulo">{titulo}</div>
       <div className="price">{precio}</div>
       {buttons()}
-      <img src={source} alt="" onClick={() => handleDetails(id)} />
+      <img
+        className="poster"
+        src={source}
+        alt=""
+        onClick={() => handleDetails(id)}
+      />
     </div>
   );
 }

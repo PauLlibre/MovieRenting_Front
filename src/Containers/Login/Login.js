@@ -72,29 +72,32 @@ export default function Login() {
 
   return (
     <div className="login-root">
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="name">
-          <label>EMAIL</label>
-          <input
-            name="email"
-            type="email"
-            value={formValues.email}
-            onChange={handleChange}
-          />
-          <div className="mail-error">{formErrors.email}</div>
-        </div>
-        <div>
-          <label>PASSWORD</label>
-          <input
-            name="password"
-            type="password"
-            value={formValues.password}
-            onChange={handleChange}
-          />
-          <div className="mail-error">{formErrors.password}</div>
-        </div>
-        <button>LOGIN</button>
-      </form>
+      <div className="login-form">
+        <div className="user-title login-title">LOGIN</div>
+        <form onSubmit={handleSubmit} noValidate>
+          <div className="name">
+            <label>EMAIL</label>
+            <input
+              name="email"
+              type="email"
+              value={formValues.email}
+              onChange={handleChange}
+            />
+            <div className="mail-error">{formErrors.email}</div>
+          </div>
+          <div className="password">
+            <label>PASSWORD</label>
+            <input
+              name="password"
+              type="password"
+              value={formValues.password}
+              onChange={handleChange}
+            />
+            <div className="mail-error">{formErrors.password}</div>
+          </div>
+          <button className="home-button login-button">LOGIN</button>
+        </form>
+      </div>
     </div>
   );
 }

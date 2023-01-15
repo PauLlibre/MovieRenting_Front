@@ -51,5 +51,10 @@ export default function Admin() {
     });
   };
 
-  return <div className="users">{listUsers(users)}</div>;
+  return (
+    <div className="user">
+      <div className="admin-title">Your current users:</div>
+      <div className="users-list">{listUsers(users)}</div>
+    </div>
+  );
 }

@@ -11,19 +11,17 @@ RentedMovieService.rentMovie = async (details, user) => {
     title: details.title,
     user_id: user,
     poster_path: details.image,
+    backdrop_path: details.backdrop_path,
   });
 };
 
 RentedMovieService.deleteRentedMovie = async (id, user) => {
-  console.log(user);
   return await axios.post(authApiUrl + `/${id}/${user}`);
 };
 
 RentedMovieService.getAllMovies = async (id) => {
   let data = await axios.get(authApiUrl + `/${id}`);
-  console.log(data);
   data = data.data.data[0];
-  console.log(data);
 
   return data;
 };
