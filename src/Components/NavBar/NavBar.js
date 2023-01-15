@@ -63,7 +63,7 @@ export default function NavBar() {
       <ul>
         <div className="logo">FILMO</div>
         <li onClick={handleHome}>Home</li>
-        <li>Categories</li>
+
         <li onClick={handleMovies}>Renting</li>
         <li onClick={handleLogout}>{isLoggedIn(loginState)}</li>
         <li className="logo">{userName.name}</li>
