@@ -4,12 +4,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import RentedMovieService from "../../services/RentedMovieService";
 
-export default function MovieCard({ title, image, price, id, update }) {
+export default function MovieCard({ title, image, price, id, update, userId }) {
   let source = `https://image.tmdb.org/t/p/w185/${image}`;
 
   const navigate = useNavigate();
 
   const { user_id } = JSON.parse(localStorage.getItem("user"));
+
+  console.log(userId);
+  const user = userId || user_id;
+  console.log(user);
 
   const details = {
     id,
@@ -39,12 +43,12 @@ export default function MovieCard({ title, image, price, id, update }) {
   };
 
   const handleRent = async (details) => {
-    await RentedMovieService.rentMovie(details, user_id);
+    await RentedMovieService.rentMovie(details, user);
     update();
   };
 
   const handleDelete = async (id) => {
-    await RentedMovieService.deleteRentedMovie(id, user_id);
+    await RentedMovieService.deleteRentedMovie(id, user);
     update();
   };
 

@@ -13,16 +13,10 @@ export default function Admin() {
   const userRole = async () => {
     const { role } = JSON.parse(localStorage.getItem("user"));
     setRole(role);
+    console.log(role);
   };
 
   const navigate = useNavigate();
-
-  if (role == "user") {
-    navigate("/movies");
-    console.log(role);
-  } else if (role != "admin") {
-    navigate("/");
-  }
 
   useEffect(() => {
     getUsers(token);

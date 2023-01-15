@@ -41,6 +41,16 @@ export default function NavBar() {
     navigate("/");
   };
 
+  const isAdmin = () => {
+    if (userName.role == "admin") {
+      return "admin";
+    }
+  };
+
+  const handleAdmin = () => {
+    navigate("/admin");
+  };
+
   const isLoggedIn = () => {
     if (loginState) {
       return "Logout";
@@ -57,6 +67,7 @@ export default function NavBar() {
           <li>Categories</li>
           <li onClick={handleMovies}>Renting</li>
           <li onClick={handleLogout}>{isLoggedIn(loginState)}</li>
+          <li onClick={handleAdmin}>{isAdmin()}</li>
           <li>{userName.name}</li>
         </ul>
       </div>

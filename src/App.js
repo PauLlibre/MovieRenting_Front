@@ -21,6 +21,7 @@ import {
 import "./App.scss";
 import { dblClick } from "@testing-library/user-event/dist/click";
 import MovieDetails from "./Containers/MovieDetails/MovieDetails";
+import UserDetails from "./Containers/UserDetails/UserDetails";
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
+          <Route path="/user/:id" element={<UserDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,0 +1,19 @@
+.user {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.movies-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  gap: 10px;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  overflow-x: scroll;
+  max-width: 100%;
+}
