@@ -38,7 +38,6 @@ export default function App() {
           <Route path="/movies/:id" element={<MovieDetails />} />
           <Route path="/user/:id" element={<UserDetails />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </div>
   );

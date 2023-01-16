@@ -88,7 +88,9 @@ export default function MoviesList() {
       <h3 className="h3-animation">Rent</h3>
       <div className="movies-list movies-list-animation">{movieList}</div>
       <h3 className="h3-animation">Available</h3>
-      <div className="movies-list movies-list-animation">{RentedMovieList}</div>
+      <div className="movies-list movies-list-animation movies-list-rented">
+        {RentedMovieList}
+      </div>
     </div>
   );
 }

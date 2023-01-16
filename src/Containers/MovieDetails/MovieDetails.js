@@ -31,10 +31,10 @@ export default function MovieDetails() {
 
   return (
     <div className="movie-details-root">
-      <h1 className="movie-title-main">{movie.title}</h1>
-      <div className="movie-details">
-        <img src={url} alt="" />
-        <div className="details">
+      <h1 className="movie-title-main movies-list-animation">{movie.title}</h1>
+      <div className="movie-details ">
+        <img className="h3-animation" src={url} alt="" />
+        <div className="details movies-list-animation">
           <ul>
             <li className="movie-title">
               <span>Overview: </span>
