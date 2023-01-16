@@ -56,12 +56,12 @@ export default function MovieCard({
 
   const handleRent = async (details) => {
     await RentedMovieService.rentMovie(details, user);
-    update();
+    update(details);
   };
 
   const handleDelete = async (id) => {
     await RentedMovieService.deleteRentedMovie(id, user);
-    update();
+    update(details);
   };
 
   const buttons = () => {
