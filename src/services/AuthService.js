@@ -3,17 +3,17 @@ import axios from "axios";
 const AuthService = {};
 
 const authApiUrl = "http://localhost:3000/auth";
-const prodUrl = "movierentingback-production.up.railway.app";
+const prodUrl = "https://movierentingback-production.up.railway.app/auth";
 
 AuthService.login = async (credentials) => {
-  return await axios.post(authApiUrl + "/login", {
+  return await axios.post(prodUrl + "/login", {
     email: credentials.email,
     password: credentials.password,
   });
 };
 
 AuthService.register = async (credentials) => {
-  return await axios.post(authApiUrl + "/register", {
+  return await axios.post(prodUrl + "/register", {
     name: credentials.name,
     email: credentials.email,
     password: credentials.password,

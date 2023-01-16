@@ -2,6 +2,7 @@ import axios from "axios";
 
 const UserService = {};
 const apiUrl = "http://localhost:3000/users";
+const prodUrl = "https://movierentingback-production.up.railway.app/users";
 
 UserService.getAllUsers = async (token) => {
   const config = {
@@ -9,7 +10,7 @@ UserService.getAllUsers = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  return await axios.get(apiUrl, config);
+  return await axios.get(prodUrl, config);
 };
 
 UserService.deleteById = async (token, id) => {
@@ -18,7 +19,7 @@ UserService.deleteById = async (token, id) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  return await axios.post(apiUrl + `/${id}`, config);
+  return await axios.post(prodUrl + `/${id}`, config);
 };
 
 UserService.getById = async (token, id) => {
@@ -28,7 +29,7 @@ UserService.getById = async (token, id) => {
     },
   };
 
-  const results = await axios.get(apiUrl + `/${id}`, config);
+  const results = await axios.get(prodUrl + `/${id}`, config);
   console.log(results.data.data);
   return results.data.data;
 };
