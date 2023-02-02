@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.e470779a.css",
-    "main.js": "/static/js/main.561dfe2e.js",
-    "index.html": "/index.html",
-    "main.e470779a.css.map": "/static/css/main.e470779a.css.map",
-    "main.561dfe2e.js.map": "/static/js/main.561dfe2e.js.map"
+    "main.css": "/MovieRenting_Front/static/css/main.e470779a.css",
+    "main.js": "/MovieRenting_Front/static/js/main.21172a63.js",
+    "index.html": "/MovieRenting_Front/index.html",
+    "main.e470779a.css.map": "/MovieRenting_Front/static/css/main.e470779a.css.map",
+    "main.21172a63.js.map": "/MovieRenting_Front/static/js/main.21172a63.js.map"
   },
   "entrypoints": [
     "static/css/main.e470779a.css",
-    "static/js/main.561dfe2e.js"
+    "static/js/main.21172a63.js"
   ]
 }
